@@ -1,3 +1,22 @@
+# Measurement{Earth} Global IoT Sensor Network
+
+**Measurement Earth** is a Blockchain-based Big Data Platform for producing, storing and distributing environmental sensor data.  
+
+The system leverages infrastructure already deployed by established and mature blockchain ecosystem partners like Telos.  This infrastructure is based on the AntelopeIO Leap blockchain system that is described by the code in this repository.  A Leap Node is the fundamental piece of software that implements a blockchain; it is the *access point* (sensor data ingestion from sensor networks and application requests for stored data) as well as the *database*, implemented in the form of a public blockchain.  
+
+The Measurement{Earth} version of the Leap node (ME-Leap) leaves the blockchain protocols and operation unchanged and focuses on enhancments in these areas:
+
+  1. Custom plugin(s) to support sensor data ingestion from established data networks like Helium.
+  2. Optimizations for more efficient operation on commodity hardware and specifically ARM Cortex-A-based compute platforms.
+
+ME-Leap should be considered an upgrade for Leap block producers that want to run a Leap Node on Cortex-A compute platforms and/or want to support ingesting the ME sensor network data format with an API RPC node directly.
+
+The Measurement{Earth} system currently operates according to this [diagram](https://user-images.githubusercontent.com/22859127/213576712-93dea751-db6f-40a2-8e27-f38455ebe506.jpg). It depends on a node.js process to act as an HTTP endpoint for Helium/LoRaWAN while collecting and assembling multiple LoRaWAN payloads to formulate a complete Leap transaction (originating from the sensor device) for submission to the v1/chain/send_transaction endpoint.  We would like to streamline this process and implement this capability in Leap software itself.
+
+Blockchains based on Leap claim to be able to support thousands of transactions per second (tps).  While admirable, this is not the case today.  From our point of view, even a 1,000,000 sensor network spread across the globe sampling at 10 minute intervals would generate an average load of 1,700 tps [source](https://github.com/EOSIoT/iot-node-simulator).  While we work up to this, the current loading is on the order of 10's of tps.  As a result there is no need to require expensive and complex server-grade block producer setups.  A happy medium should be reachable between supporting a realistic load of transaction flow while reducing the barriers to supporting and operating the blockchain infrastructure. This is what we aim to achieve by targetting optimizations towards the Cortex-A compute platform.
+
+-----
+
 # Leap
 
 1. [Branches](#branches)
